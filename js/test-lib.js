@@ -1,8 +1,9 @@
 var addon = require('../build/Release/i2cbridge');
 
 console.log(addon);
-console.log(addon.open);
-console.log(addon.open(0));
+var bus = addon.open({asd:1});
+console.log(bus);
+console.log(bus.scan());
 
 /*
 var bus = addon.open(1);
