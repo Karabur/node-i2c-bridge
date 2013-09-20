@@ -20,7 +20,7 @@ private:
 	Bus(v8::Handle<v8::Value>);
 	~Bus();
 
-	v8::Persistent<v8::Value> data;
+	int addr;
 
 	static v8::Persistent<v8::Function> constructor;
 	static v8::Handle<v8::Value> New(const v8::Arguments& args);

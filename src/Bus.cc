@@ -15,11 +15,11 @@ using namespace v8;
 Persistent<Function> Bus::constructor;
 
 Bus::Bus(Handle<Value> data) {
-	this->data = Persistent<Value>::New(data);
+	this->addr = data->Int32Value();
 }
 
 Bus::~Bus() {
-	this->data.Dispose();
+
 }
 
 void Bus::Init() {
@@ -41,7 +41,7 @@ Handle<Value> Bus::New(const Arguments& args) {
 	return args.This();
 }
 
-v8::Handle<v8::Value> Bus::NewInstance(const v8::Arguments& args) {
+Handle<Value> Bus::NewInstance(const v8::Arguments& args) {
 	HandleScope scope;
 
 	const unsigned argc = 1;
@@ -49,9 +49,9 @@ v8::Handle<v8::Value> Bus::NewInstance(const v8::Arguments& args) {
 	return scope.Close(Bus::constructor->NewInstance(argc, argv));
 }
 
-v8::Handle<v8::Value> Bus::Scan(const v8::Arguments& args) {
+Handle<Value> Bus::Scan(const v8::Arguments& args) {
 
 	Bus* obj = ObjectWrap::Unwrap<Bus>(args.This());
 
-	return obj->data;
+	return Number::New(obj->addr);
 }
