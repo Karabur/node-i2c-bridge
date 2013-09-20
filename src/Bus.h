@@ -21,10 +21,24 @@ private:
 	~Bus();
 
 	int addr;
+	int file;
+
+	typedef v8::Handle<v8::Value> (Bus::*WrappedMethod)(
+			const v8::Arguments& args);
+
+	template<WrappedMethod m>
+	static v8::Handle<v8::Value> Method(const v8::Arguments& args) {
+		Bus* obj = ObjectWrap::Unwrap<Bus>(args.This());
+		return (obj->*m)(args);
+	}
 
 	static v8::Persistent<v8::Function> constructor;
 	static v8::Handle<v8::Value> New(const v8::Arguments& args);
-	static v8::Handle<v8::Value> Scan(const v8::Arguments& args);
+
+
+	v8::Handle<v8::Value> Scan(const v8::Arguments& args);
+	v8::Handle<v8::Value> SetAddress(const v8::Arguments& args);
+
 };
 
 #endif /* BUS_H_ */
