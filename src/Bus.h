@@ -34,11 +34,13 @@ private:
 
 	static v8::Persistent<v8::Function> constructor;
 	static v8::Handle<v8::Value> New(const v8::Arguments& args);
+	int SetI2CAddress(const int);
 
 
-	v8::Handle<v8::Value> Scan(const v8::Arguments& args);
+	//JS API
 	v8::Handle<v8::Value> SetAddress(const v8::Arguments& args);
-
+	v8::Handle<v8::Value> ReadByte(const v8::Arguments& args);
+	v8::Handle<v8::Value> WriteByte(const v8::Arguments& args);
 };
 
 #endif /* BUS_H_ */
